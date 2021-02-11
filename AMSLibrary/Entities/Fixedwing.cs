@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AMSLibrary.Entities
+﻿namespace AMSLibrary.Entities
 {
-    class Fixedwing : IHasId
+    class Fixedwing : IHasId, IParkable
     {
         public string Id { get; set; }
         public string Model { get; set; }
@@ -34,5 +30,13 @@ namespace AMSLibrary.Entities
         public string GetPrefix() => "FW";
 
         public void SetId(string id) => Id = id;
+
+        public void Park(string airportId) => AirportId = airportId;
+
+        public void Unpark() => AirportId = string.Empty;
+
+        public void ChangeType(string type) => PlaneType = type;
+
+        public void ChangeMinNeededRunwaySize(double minNeededRunwaySize) => MinNeededRunwaySize = minNeededRunwaySize;
     }
 }

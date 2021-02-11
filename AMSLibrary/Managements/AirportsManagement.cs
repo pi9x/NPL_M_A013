@@ -1,63 +1,80 @@
 ﻿using AMSLibrary.DataAccess;
 using AMSLibrary.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMSLibrary.Managements
 {
-    public class AirportsManagement : IAirportsManagement
+    public partial class Managements : IManagements
     {
-        private readonly AirportsAccess airportsAccess;
+        private readonly int               airportCapacity = 4;
+        private readonly AirportsAccess    airportsAccess;
+        private readonly FixedwingsAccess  fixedwingsAccess;
+        private readonly HelicoptersAccess helicoptersAccess;
 
-        #region Create singleton
-        private AirportsManagement(string filePath)
+        #region Create managements singleton
+        private Managements(string airportsPath, string fixedwingsPath, string helicoptersPath)
         {
-            airportsAccess = new AirportsAccess(filePath);
+            airportsAccess = new AirportsAccess(airportsPath);
+            fixedwingsAccess = new FixedwingsAccess(fixedwingsPath);
+            helicoptersAccess = new HelicoptersAccess(helicoptersPath);
         }
 
-        private static AirportsManagement airportsManagement;
+        private static Managements managements;
 
-        public static AirportsManagement GetInstance(string filePath)
+        public static Managements InitManagements(string airportsPath, string fixedwingsPath, string helicoptersPath)
         {
-            if (airportsManagement == null)
-                airportsManagement = new AirportsManagement(filePath);
+            if (managements == null)
+                managements = new Managements(airportsPath, fixedwingsPath, helicoptersPath);
 
-            return airportsManagement;
+            return managements;
         }
-
         #endregion
 
         public void CreateAirport(string name, double runwaySize, int fixedwingCapacity, int helicopterCapacity)
         {
-            // TODO - Validate
-            airportsAccess.Create(new Airport(name, runwaySize, fixedwingCapacity, helicopterCapacity));
+            if (airportsAccess.Get(out _).Count < airportCapacity)
+                airportsAccess.Create(new Airport(name, runwaySize, fixedwingCapacity, helicopterCapacity));
+            else
+                throw new Exception($"Exceeded airport capacity ({airportCapacity}).");
         }
 
-        //public void AddFixedwing(string airportId, string fixedwingId)
-        //{
-        //    // TODO - Validate
-        //    airportsAccess.AddFixedwing(airportId, fixedwingId);
-        //}
+        public void ParkFixedwing(string airportId, string fixedwingId)
+        {
+            Airport airport = airportsAccess.GetById(airportId);
+            Fixedwing fixedwing = fixedwingsAccess.GetById(fixedwingId);
+            if (fixedwing.AirportId == string.Empty)
+            {
+                if (fixedwing.MinNeededRunwaySize < airport.RunwaySize)
+                {
+                    airportsAccess.ParkFixedwing(airportId, fixedwingId);
+                    fixedwingsAccess.Park(fixedwingId, airportId);
+                }
+                else
+                    throw new Exception("Min needed runway size exceeded airport runway size.");
+            }  
+            else
+                throw new Exception($"Fixedwing {fixedwingId} already parks in airport {fixedwing.AirportId}.");
+        }
 
-        //public void AddHelicopter(string airportId, string helicopterId)
-        //{
-        //    // TODO - Validate
-        //    airportsAccess.AddHelicopter(airportId, helicopterId);
-        //}
+        public void ParkHelicopter(string airportId, string helicopterId)
+        {
+            Helicopter helicopter = helicoptersAccess.GetById(helicopterId);
+            if (helicopter.AirportId == string.Empty)
+                airportsAccess.ParkHelicopter(airportId, helicopterId);
+            else
+                throw new Exception($"Helicopter {helicopterId} already parks in airport {helicopter.AirportId}.");
+        }
 
-        //public void DeleteFixedwing(string airportId, string fixedwingId)
-        //{
-        //    // TODO - Validate
-        //    airportsAccess.DeleteFixedwing(airportId, fixedwingId);
-        //}
+        public void UnparkFixedwing(string airportId, string fixedwingId)
+        {
+            airportsAccess.UnparkFixedwing(airportId, fixedwingId);
+            fixedwingsAccess.Unpark(fixedwingId);
+        }
 
-        //public void DeleteHelicopter(string airportId, string helicopterId)
-        //{
-        //    // TODO - Validate
-        //    airportsAccess.DeleteHelicopter(airportId, helicopterId);
-        //}
+        public void UnparkHelicopter(string airportId, string helicopterId)
+        {
+            airportsAccess.UnparkHelicopter(airportId, helicopterId);
+            helicoptersAccess.Unpark(helicopterId);
+        }
     }
 }

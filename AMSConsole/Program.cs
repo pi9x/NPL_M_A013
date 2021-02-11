@@ -7,42 +7,32 @@ namespace AMSConsole
     {
         static void Main(string[] args)
         {
+            Menu.ShowMainMenu();
+            string chosen = Console.ReadLine();
 
-            AirportsManagement a = AirportsManagement.GetInstance(@"d:\airports.json");
-            AirportsManagement b = AirportsManagement.GetInstance(@"d:\airports2.json");
+            while (chosen != "0")
+            {
+                switch (chosen)
+                {
+                    case "1":
+                        Function.ManageAirports();
+                        break;
 
-            //Console.WriteLine(a == b);
+                    case "2":
+                        Function.ManageFixedwings();
+                        break;
 
-            a.CreateAirport("Tan Son Nhat", 30.4, 20, 40);
+                    case "3":
+                        Function.ManageHelicopters();
+                        break;
 
-            b.CreateAirport("Lien Khuong", 23, 10, 20);
+                    default:
+                        Console.Write("Wrong action!\nChoose an action: ");
+                        chosen = Console.ReadLine();
+                        break;
+                }
+            }
 
-            //am.AddAirport("Noi Bai", 23, 10, 20);
-
-            //am.AddFixedwing("AP00001", "FW00001");
-
-            //am.AddFixedwing("AP00001", "FW00002");
-
-            //am.AddFixedwing("AP00002", "FW00003");
-
-            //am.AddHelicopter("AP00001", "RW00005");
-
-            //am.AddHelicopter("AP00001", "RW00006");
-
-            //am.DeleteFixedwing("AP00003", "FW00003");
-
-            //try
-            //{
-            //    am.AddFixedwing("AP00003", "FW00006");
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
-
-
-
-            Console.WriteLine("Done!");
         }
     }
 }

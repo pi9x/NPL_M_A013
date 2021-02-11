@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AMSLibrary.Entities
+﻿namespace AMSLibrary.Entities
 {
     interface IHasId
     {

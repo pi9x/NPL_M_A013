@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AMSConsole
+﻿namespace AMSConsole
 {
-    public static class Validation
+    static class Validation
     {
-
-
         public static string Model(string input)
         {
             input = input.Trim();

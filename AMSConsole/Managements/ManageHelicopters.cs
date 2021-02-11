@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AMSConsole
 {
-    static class Init
+    class ManageHelicopters
     {
     }
 }

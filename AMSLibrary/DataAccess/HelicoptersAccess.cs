@@ -1,9 +1,4 @@
 ﻿using AMSLibrary.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMSLibrary.DataAccess
 {
@@ -12,6 +7,20 @@ namespace AMSLibrary.DataAccess
         public HelicoptersAccess(string filePath)
         {
             this.filePath = filePath;
+        }
+
+        public void Park(string helicopterId, string airportId)
+        {
+            Helicopter helicopter = GetById(helicopterId);
+            helicopter.Park(airportId);
+            Update(helicopter);
+        }
+
+        public void Unpark(string helicopterId)
+        {
+            Helicopter helicopter = GetById(helicopterId);
+            helicopter.Unpark();
+            Update(helicopter);
         }
     }
 }

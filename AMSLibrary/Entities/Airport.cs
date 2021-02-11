@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AMSLibrary.Entities
 {
@@ -19,12 +19,6 @@ namespace AMSLibrary.Entities
 
         public List<string> HelicopterIds { get; set; }
 
-        //public Airport()
-        //{
-        //    FixedwingIds = new List<string>();
-        //    HelicopterIds = new List<string>();
-        //}
-
         public Airport(string name, double runwaySize, int fixedwingCapacity, int helicopterCapacity)
         {
             Name = name;
@@ -40,5 +34,33 @@ namespace AMSLibrary.Entities
         public string GetPrefix() => "AP";
 
         public void SetId(string id) => Id = id;
+
+        public void ParkFixedwing(string fixedwingId)
+        {
+            if (FixedwingIds.Count < FixedwingCapacity)
+                FixedwingIds.Add(fixedwingId);
+            else
+                throw new Exception("Exceeded fixedwing capacity!");
+        }
+
+        public void UnparkFixedwing(string fixedwingId)
+        {
+            if (!FixedwingIds.Remove(fixedwingId))
+                throw new Exception($"Fixedwing {fixedwingId} does not park in airport {Id}.");
+        }
+
+        public void ParkHelicopter(string helicopterId)
+        {
+            if (HelicopterIds.Count < HelicopterCapacity)
+                HelicopterIds.Add(helicopterId);
+            else
+                throw new Exception("Exceeded helicopter capacity!");
+        }
+
+        public void UnparkHelicopter(string helicopterId)
+        {
+            if (!HelicopterIds.Remove(helicopterId))
+                throw new Exception($"Helicopter {helicopterId} does not park in airport {Id}.");
+        }
     }
 }

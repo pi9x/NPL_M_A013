@@ -1,17 +1,10 @@
 ﻿using AMSLibrary.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMSLibrary.DataAccess
 {
-    interface IFixedwingsAccess : IGenericAccess<Fixedwing>
+    interface IFixedwingsAccess : IGenericAccess<Fixedwing>, IParkingAccess
     {
-        void Park(string airportId);
-        void Unpark();
-        void ChangeType(string type);
-        void
+        void ChangeType(string fixedwingId, string type);
+        void ChangeMinNeededRunwaySize(string fixedwingId, double minNeededRunwaySize);
     }
 }

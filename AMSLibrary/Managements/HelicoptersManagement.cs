@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AMSLibrary.Entities;
+using System;
 
 namespace AMSLibrary.Managements
 {
-    class HelicoptersManagement : IHelicoptersManagement
+    public partial class Managements : IManagements
     {
-        public void CreateHelicopter(string model, double cruiseSpeed, double emptyWeight,
-                                     double maxTakeoffWeight, double range)
+        public void CreateHelicopter(string model, double cruiseSpeed, double emptyWeight, double maxTakeoffWeight, double range)
         {
-            throw new NotImplementedException();
+            if (model.Length <= 40 && string.IsNullOrWhiteSpace(model))
+            {
+                if (emptyWeight * 1.5 >= maxTakeoffWeight)
+                    helicoptersAccess.Create(new Helicopter(model, cruiseSpeed, emptyWeight, maxTakeoffWeight, range));
+                else
+                    throw new Exception("Max takeoff weight exceeds 1.5 times of its empty weight.");
+            }
+            else
+                throw new Exception("Model must not exceed 40 characters.");
         }
     }
 }
