@@ -6,13 +6,20 @@ namespace AMSConsole
     {
         public static void MainManagement()
         {
-            Menu.ShowMainMenu();
-            string chosen = Console.ReadLine();
+            string chosen = string.Empty;
 
             while (chosen != "0")
             {
+                Console.Clear();
+                Menu.ShowMainMenu();
+                Console.Write("Choose an action: ");
+                chosen = Console.ReadLine();
+
                 switch (chosen)
                 {
+                    case "0":
+                        break;
+
                     case "1":
                         ManageAirports();
                         break;
@@ -35,36 +42,43 @@ namespace AMSConsole
 
         public static void ManageAirports()
         {
-            Menu.ShowAirportMenu();
-            string chosen = Console.ReadLine();
+            string chosen = string.Empty;
 
             while (chosen != "0")
             {
+                Console.Clear();
+                Console.Write("ALL EXISTING AIRPORTS\n\n");
+                AMSConsole.ManageAirports.ShowAllAirports();
+                Console.WriteLine();
+
+                Menu.ShowAirportMenu();
+                Console.Write("Choose an action: ");
+                chosen = Console.ReadLine();
+
                 switch (chosen)
                 {
-                    case "1":
-                        AMSConsole.ManageAirports.CreateNewAirport();
+                    case "0":
+                        break;
 
-                        Console.Write("Press any key to go back...");
-                        Console.ReadKey();
-                        //ManageAirports();
-                        chosen = "0";
+                    case "1":
+                        Console.Clear();
+                        Console.Write("ALL EXISTING AIRPORTS\n\n");
+                        AMSConsole.ManageAirports.ShowAllAirports();
+                        Console.WriteLine();
+
+                        Console.Write("CREATE A NEW AIRPORT\n\n");
+                        AMSConsole.ManageAirports.CreateNewAirport();
                         break;
 
                     case "2":
+                        Console.Clear();
+                        Console.Write("ALL EXISTING AIRPORTS\n\n");
                         AMSConsole.ManageAirports.ShowAllAirports();
-                        
-                        Console.Write("Press any key to go back...");
-                        Console.ReadKey();
-                        //ManageAirports();
-                        break;
+                        Console.WriteLine();
 
-                    case "3":
+                        Console.Write("SELECT AN AIRPORT\n\n");
                         AMSConsole.ManageAirports.ManageSelectedAirport();
 
-                        Console.Write("Press any key to go back...");
-                        Console.ReadKey();
-                        //ManageAirports();
                         break;
 
                     default:

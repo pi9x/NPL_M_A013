@@ -22,24 +22,21 @@ namespace AMSConsole
                 int fixedwingCapacity = 0;
                 int helicopterCapacity = 0;
 
-                Console.Clear();
-                Console.WriteLine("ADD A NEW AIRPORT\n");
-
                 while (string.IsNullOrWhiteSpace(name))
                 {
-                    Console.Write("Airport name: ");
+                    Console.Write("Airport name:        ");
                     name = Console.ReadLine().Trim().ToUpper();
                 }
 
                 while (runwaySize == 0)
                 {
-                    Console.Write("Runway size: ");
+                    Console.Write("Runway size:         ");
                     runwaySize = Validation.PositiveDouble(Console.ReadLine());
                 }
 
                 while (fixedwingCapacity == 0)
                 {
-                    Console.Write("Fixedwing capacity: ");
+                    Console.Write("Fixedwing capacity:  ");
                     fixedwingCapacity = Validation.PositiveInteger(Console.ReadLine());
                 }
 
@@ -66,39 +63,59 @@ namespace AMSConsole
 
         public static void ShowAllAirports()
         {
-            Console.Clear();
-            Console.WriteLine("ALL AIRPORTS\n");
             try
             {
-                Console.Write(managements.AllAirports());
+                Console.WriteLine(managements.AllAirports());
             }
             catch (Exception e)
             {
-                Console.Write(e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
         public static void ManageSelectedAirport()
         {
-            Console.Clear();
-            Console.Write("SELECT AN AIRPORT\n\nAirport ID: ");
+            Console.Write("Airport ID: ");
             string airportId = Console.ReadLine().Trim().ToUpper();
 
             try
             {
                 Console.Clear();
-                Console.Write("SELECT AN AIRPORT\n\n");
                 Console.WriteLine(managements.SelectedAirport(airportId));
+
+                Console.WriteLine();
+                Menu.ShowSelectedAirportMenu();
+                Console.Write("Choose an action: ");
+                Console.ReadLine();
             }
             catch (Exception e)
             {
-                Console.WriteLine("\n" + e.Message);
-                Console.Write("Press any key to search for an airport again...");
+                Console.WriteLine(e.Message);
+                Console.Write("Press any key to go back...");
                 Console.ReadKey();
-                //ManageSelectedAirport();
             }
 
-            Menu.ShowSelectedAirportMenu();
+
+        }
+
+        public static void ParkFixedwing()
+        {
+            
+        }
+
+        public static void UnparkFixedwing()
+        {
+
+        }
+
+        public static void ParkHelicopter()
+        {
+
+        }
+
+        public static void UnparkHelicopter()
+        {
+
         }
     }
 }

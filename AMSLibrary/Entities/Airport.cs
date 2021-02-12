@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AMSLibrary.Entities
 {
@@ -67,6 +68,14 @@ namespace AMSLibrary.Entities
 
         public string FullInfo()
         {
+            StringBuilder fixedwingIds = new StringBuilder();
+            foreach (string id in FixedwingIds)
+                fixedwingIds.Append(id).Append(' ');
+
+            StringBuilder helicopterIds = new StringBuilder();
+            foreach (string id in HelicopterIds)
+                helicopterIds.Append(id).Append(' ');
+
             return $"Id:               {Id}\n" +
                    $"Name:             {Name}\n" +
                    $"Runway size:      {RunwaySize}\n" +
@@ -74,8 +83,8 @@ namespace AMSLibrary.Entities
                    $"   - Fixedwing:   {FixedwingCapacity}\n" +
                    $"   - Helicopter:  {HelicopterCapacity}\n" +
                    $"Current parking:\n" +
-                   $"   - Fixedwings:  {FixedwingIds}\n" +
-                   $"   - Helicopters: {HelicopterIds}";
+                   $"   - Fixedwings:  {fixedwingIds}\n" +
+                   $"   - Helicopters: {helicopterIds}";
         }
     }
 }
