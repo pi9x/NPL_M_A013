@@ -30,13 +30,13 @@ namespace AMSConsole
                           "Choose an action: ");
         }
 
-        static void ShowDetailedAirportMenu()
+        public static void ShowSelectedAirportMenu()
         {
             Console.Write("[1] - Park a fixedwing\n" +
                           "[2] - Unpark a fixedwing\n" +
                           "[3] - Park a helicopter\n" +
                           "[4] - Unpark a helicopter\n" +
-                          "[5] - Back to main menu\n\n" +
+                          "[5] - Back to airports management\n\n" +
                           "Choose an action: ");
         }
 
@@ -54,7 +54,8 @@ namespace AMSConsole
         public static void ShowDetailedFixedwingMenu()
         {
             Console.Write("[1] - Change plane type\n" +
-                          "[2] - Change min needed runway size\n\n" +
+                          "[2] - Change min needed runway size\n" +
+                          "[0] - Back to fixedwings management\n\n" +
                           "Choose an action: ");
         }
 

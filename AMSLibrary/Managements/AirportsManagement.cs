@@ -1,6 +1,8 @@
 ﻿using AMSLibrary.DataAccess;
 using AMSLibrary.Entities;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace AMSLibrary.Managements
 {
@@ -35,7 +37,26 @@ namespace AMSLibrary.Managements
             if (airportsAccess.Get(out _).Count < airportCapacity)
                 airportsAccess.Create(new Airport(name, runwaySize, fixedwingCapacity, helicopterCapacity));
             else
-                throw new Exception($"Exceeded airport capacity ({airportCapacity}).");
+                throw new Exception($"Exceeds airport capacity ({airportCapacity}).");
+        }
+
+        public string AllAirports()
+        {
+            StringBuilder allAirportsInfo = new StringBuilder("ID          Name\n--          ----\n");
+            List<Airport> airports = airportsAccess.Get(out _);
+
+            foreach (Airport airport in airports)
+            {
+                allAirportsInfo.Append(airport.ShortInfo());
+            }
+
+            return allAirportsInfo.ToString();
+        }
+
+        public string SelectedAirport(string airportId)
+        {
+            Airport airport = airportsAccess.GetById(airportId);
+            return airport.FullInfo();
         }
 
         public void ParkFixedwing(string airportId, string fixedwingId)
@@ -50,7 +71,7 @@ namespace AMSLibrary.Managements
                     fixedwingsAccess.Park(fixedwingId, airportId);
                 }
                 else
-                    throw new Exception("Min needed runway size exceeded airport runway size.");
+                    throw new Exception("Min needed runway size exceeds airport runway size.");
             }  
             else
                 throw new Exception($"Fixedwing {fixedwingId} already parks in airport {fixedwing.AirportId}.");

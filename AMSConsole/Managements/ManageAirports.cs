@@ -13,15 +13,15 @@ namespace AMSConsole
 
         public static void CreateNewAirport()
         {
-            string name = string.Empty;
-            double runwaySize = 0;
-            int fixedwingCapacity = 0;
-            int helicopterCapacity = 0;
-
             bool success = false;
 
             while (!success)
             {
+                string name = string.Empty;
+                double runwaySize = 0;
+                int fixedwingCapacity = 0;
+                int helicopterCapacity = 0;
+
                 Console.Clear();
                 Console.WriteLine("ADD A NEW AIRPORT\n");
 
@@ -53,12 +53,11 @@ namespace AMSConsole
                 {
                     managements.CreateAirport(name, runwaySize, fixedwingCapacity, helicopterCapacity);
                     success = true;
-                    Console.Write("Press any key to go back to main menu...");
-                    Console.ReadKey();
+                    Console.WriteLine("Create new airport successfully.");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine("\n" + e.Message);
                     Console.Write("Press any key to create a new airport again...");
                     Console.ReadKey();
                 }
@@ -69,12 +68,37 @@ namespace AMSConsole
         {
             Console.Clear();
             Console.WriteLine("ALL AIRPORTS\n");
-
+            try
+            {
+                Console.Write(managements.AllAirports());
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
         }
 
-        public static void SelectAirport()
+        public static void ManageSelectedAirport()
         {
+            Console.Clear();
+            Console.Write("SELECT AN AIRPORT\n\nAirport ID: ");
+            string airportId = Console.ReadLine().Trim().ToUpper();
 
+            try
+            {
+                Console.Clear();
+                Console.Write("SELECT AN AIRPORT\n\n");
+                Console.WriteLine(managements.SelectedAirport(airportId));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("\n" + e.Message);
+                Console.Write("Press any key to search for an airport again...");
+                Console.ReadKey();
+                //ManageSelectedAirport();
+            }
+
+            Menu.ShowSelectedAirportMenu();
         }
     }
 }

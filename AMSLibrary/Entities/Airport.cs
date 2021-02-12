@@ -62,5 +62,20 @@ namespace AMSLibrary.Entities
             if (!HelicopterIds.Remove(helicopterId))
                 throw new Exception($"Helicopter {helicopterId} does not park in airport {Id}.");
         }
+
+        public string ShortInfo() => $"{Id}     {Name}\n";
+
+        public string FullInfo()
+        {
+            return $"Id:               {Id}\n" +
+                   $"Name:             {Name}\n" +
+                   $"Runway size:      {RunwaySize}\n" +
+                   $"Capacity:\n" +
+                   $"   - Fixedwing:   {FixedwingCapacity}\n" +
+                   $"   - Helicopter:  {HelicopterCapacity}\n" +
+                   $"Current parking:\n" +
+                   $"   - Fixedwings:  {FixedwingIds}\n" +
+                   $"   - Helicopters: {HelicopterIds}";
+        }
     }
 }
