@@ -40,16 +40,13 @@ namespace AMSConsole
             }
         }
 
-        public static void ManageAirports()
+        private static void ManageAirports()
         {
             string chosen = string.Empty;
 
             while (chosen != "0")
             {
-                Console.Clear();
-                Console.Write("ALL EXISTING AIRPORTS\n\n");
-                AMSConsole.ManageAirports.ShowAllAirports();
-                Console.WriteLine();
+                ShowAllExistingAirports();
 
                 Menu.ShowAirportMenu();
                 Console.Write("Choose an action: ");
@@ -61,24 +58,30 @@ namespace AMSConsole
                         break;
 
                     case "1":
-                        Console.Clear();
-                        Console.Write("ALL EXISTING AIRPORTS\n\n");
-                        AMSConsole.ManageAirports.ShowAllAirports();
-                        Console.WriteLine();
+                        ShowAllExistingAirports();
 
                         Console.Write("CREATE A NEW AIRPORT\n\n");
                         AMSConsole.ManageAirports.CreateNewAirport();
+                        Console.Write("Press any key to go back...");
+                        Console.ReadKey();
                         break;
 
                     case "2":
-                        Console.Clear();
-                        Console.Write("ALL EXISTING AIRPORTS\n\n");
-                        AMSConsole.ManageAirports.ShowAllAirports();
-                        Console.WriteLine();
+                        ShowAllExistingAirports();
+
+                        Console.Write("DELETE AN AIRPORT\n\n");
+                        AMSConsole.ManageAirports.DeleteAirport();
+                        Console.Write("Press any key to go back...");
+                        Console.ReadKey();
+                        break;
+
+                    case "3":
+                        ShowAllExistingAirports();
 
                         Console.Write("SELECT AN AIRPORT\n\n");
                         AMSConsole.ManageAirports.ManageSelectedAirport();
-
+                        Console.Write("Press any key to go back...");
+                        Console.ReadKey();
                         break;
 
                     default:
@@ -89,13 +92,29 @@ namespace AMSConsole
             }
         }
 
-        public static void ManageFixedwings()
+        private static void ShowAllExistingAirports()
+        {
+            Console.Clear();
+            Console.Write("ALL EXISTING AIRPORTS\n\n");
+            AMSConsole.ManageAirports.ShowAllAirports();
+            Console.WriteLine();
+        }
+
+        private static void ManageFixedwings()
         {
             Menu.ShowFixedwingMenu();
 
         }
 
-        public static void ManageHelicopters()
+        private static void ShowAllExistingFixedwings()
+        {
+            Console.Clear();
+            Console.Write("ALL EXISTING FIXEDWINGS\n\n");
+            AMSConsole.ManageFixedwings.ShowAllFixedwings();
+            Console.WriteLine();
+        }
+
+        private static void ManageHelicopters()
         {
             Menu.ShowHelicopterMenu();
 

@@ -31,9 +31,9 @@ namespace AMSLibrary.DataAccess
         public void Delete(string id)
         {
             List<T> entities = Get(out _);
-            T entity = GetById(id);
-            if (entity == null)
-                throw new Exception($"Deleting {typeof(T).Name} failed: {id} not found.");
+            T entity = entities.First(e => e.GetId() == id);
+            //if (entity == null)
+            //    throw new Exception($"Deleting {typeof(T).Name} failed: {id} not found.");
 
             entities.Remove(entity);
 

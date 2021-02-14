@@ -5,6 +5,11 @@ namespace AMSLibrary.Managements
 {
     public partial class Managements : IManagements
     {
+        public string AllHelicopters()
+        {
+            throw new NotImplementedException();
+        }
+
         public void CreateHelicopter(string model, double cruiseSpeed, double emptyWeight, double maxTakeoffWeight, double range)
         {
             if (model.Length <= 40 && string.IsNullOrWhiteSpace(model))
@@ -16,6 +21,11 @@ namespace AMSLibrary.Managements
             }
             else
                 throw new Exception("Model must not exceed 40 characters.");
+        }
+
+        public void DeleteHelicopter(string helicopterId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

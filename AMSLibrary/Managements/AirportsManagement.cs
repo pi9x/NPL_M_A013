@@ -32,6 +32,18 @@ namespace AMSLibrary.Managements
         }
         #endregion
 
+        public string AllAirports()
+        {
+            StringBuilder allAirports = new StringBuilder("ID          Name\n" +
+                                                          "--          ----\n");
+            List<Airport> airports = airportsAccess.Get(out _);
+
+            foreach (Airport airport in airports)
+                allAirports.Append(airport.ShortInfo());
+
+            return allAirports.ToString();
+        }
+
         public void CreateAirport(string name, double runwaySize, int fixedwingCapacity, int helicopterCapacity)
         {
             if (airportsAccess.Get(out _).Count < airportCapacity)
@@ -40,17 +52,9 @@ namespace AMSLibrary.Managements
                 throw new Exception($"Exceeds airport capacity ({airportCapacity}).");
         }
 
-        public string AllAirports()
+        public void DeleteAirport(string airportId)
         {
-            StringBuilder allAirportsInfo = new StringBuilder("ID          Name\n--          ----\n");
-            List<Airport> airports = airportsAccess.Get(out _);
-
-            foreach (Airport airport in airports)
-            {
-                allAirportsInfo.Append(airport.ShortInfo());
-            }
-
-            return allAirportsInfo.ToString();
+            airportsAccess.Delete(airportId);
         }
 
         public string SelectedAirport(string airportId)

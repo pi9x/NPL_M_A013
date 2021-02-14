@@ -38,5 +38,20 @@
         public void ChangeType(string type) => PlaneType = type;
 
         public void ChangeMinNeededRunwaySize(double minNeededRunwaySize) => MinNeededRunwaySize = minNeededRunwaySize;
+
+        public string ShortInfo() => $"{Id}     {AirportId}\n";
+
+        public string FullInfo()
+        {
+            return $"ID:                     {Id}\n" +
+                   $"Model:                  {Model}\n" +
+                   $"Plane type:             {PlaneType}\n" +
+                   $"Cruise speed:           {CruiseSpeed}\n" +
+                   $"Empty weight:           {EmptyWeight}\n" +
+                   $"Max takeoff weight:     {MaxTakeoffWeight}\n" +
+                   $"Min needed runway size: {MinNeededRunwaySize}\n" +
+                   $"Fly method:             {FlyMethod}\n" +
+                   $"Park in airport:        {AirportId}";
+        }
     }
 }

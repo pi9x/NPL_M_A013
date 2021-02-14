@@ -1,12 +1,27 @@
 ﻿using AMSLibrary.Entities;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace AMSLibrary.Managements
 {
     public partial class Managements : IManagements
     {
         private static readonly List<string> fixedwingTypes = new List<string>() { "CAG", "LGR", "PRV" };
+
+        public string AllFixedwings()
+        {
+            StringBuilder allFixedwings = new StringBuilder("ID          Parking in\n" +
+                                                            "--          ----------\n");
+
+            List<Fixedwing> fixedwings = fixedwingsAccess.Get(out _);
+
+            foreach (Fixedwing fixedwing in fixedwings)
+                allFixedwings.Append(fixedwing.ShortInfo());
+
+            return allFixedwings.ToString();
+        }
+
         public void CreateFixedwing(string model, string planeType, double cruiseSpeed, double emptyWeight, double maxTakeoffWeight, double minNeededRunwaySize)
         {
             if (model.Length <= 40 && string.IsNullOrWhiteSpace(model))
@@ -38,6 +53,11 @@ namespace AMSLibrary.Managements
                 fixedwingsAccess.ChangeType(fixedwingId, type);
             else
                 throw new Exception("Wrong plane type.");
+        }
+
+        public void DeleteFixedwing(string fixedwingId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
