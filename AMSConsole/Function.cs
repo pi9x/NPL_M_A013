@@ -47,7 +47,6 @@ namespace AMSConsole
             while (chosen != "0")
             {
                 ShowAllExistingAirports();
-
                 Menu.ShowAirportMenu();
                 Console.Write("Choose an action: ");
                 chosen = Console.ReadLine();
@@ -59,7 +58,6 @@ namespace AMSConsole
 
                     case "1":
                         ShowAllExistingAirports();
-
                         Console.Write("CREATE A NEW AIRPORT\n\n");
                         AMSConsole.ManageAirports.CreateNewAirport();
                         Console.Write("Press any key to go back...");
@@ -68,18 +66,14 @@ namespace AMSConsole
 
                     case "2":
                         ShowAllExistingAirports();
-
-                        Console.Write("DELETE AN AIRPORT\n\n");
-                        AMSConsole.ManageAirports.DeleteAirport();
-                        Console.Write("Press any key to go back...");
-                        Console.ReadKey();
+                        Console.Write("SELECT AN AIRPORT\n\n");
+                        AMSConsole.ManageAirports.ManageSelectedAirport();
                         break;
 
                     case "3":
                         ShowAllExistingAirports();
-
-                        Console.Write("SELECT AN AIRPORT\n\n");
-                        AMSConsole.ManageAirports.ManageSelectedAirport();
+                        Console.Write("DELETE AN AIRPORT\n\n");
+                        AMSConsole.ManageAirports.DeleteAirport();
                         Console.Write("Press any key to go back...");
                         Console.ReadKey();
                         break;
@@ -102,7 +96,48 @@ namespace AMSConsole
 
         private static void ManageFixedwings()
         {
-            Menu.ShowFixedwingMenu();
+            string chosen = string.Empty;
+
+            while (chosen != "0")
+            {
+                ShowAllExistingFixedwings();
+                Menu.ShowFixedwingMenu();
+                Console.Write("Choose an action: ");
+                chosen = Console.ReadLine();
+
+                switch (chosen)
+                {
+                    case "1":
+                        ShowAllExistingFixedwings();
+                        Console.Write("CREATE A NEW FIXEDWING\n\n");
+                        AMSConsole.ManageFixedwings.CreateNewFixedwing();
+                        Console.Write("Press any key to go back...");
+                        Console.ReadKey();
+                        break;
+
+                    case "2":
+                        ShowAllExistingFixedwings();
+                        Console.Write("SELECT A FIXEDWING\n\n");
+                        AMSConsole.ManageFixedwings.ManageSelectedFixedwing();
+                        break;
+
+                    case "3":
+                        ShowAllExistingFixedwings();
+                        Console.Write("DELETE A FIXEDWING\n\n");
+                        AMSConsole.ManageFixedwings.DeleteFixedwing();
+                        Console.Write("Press any key to go back...");
+                        Console.ReadKey();
+                        break;
+
+                    case "0":
+                        break;
+
+                    default:
+                        Console.Write("Wrong action!\nChoose an action: ");
+                        chosen = Console.ReadLine();
+                        break;
+                }
+            }
 
         }
 
@@ -116,8 +151,56 @@ namespace AMSConsole
 
         private static void ManageHelicopters()
         {
-            Menu.ShowHelicopterMenu();
+            string chosen = string.Empty;
 
+            while (chosen != "0")
+            {
+                ShowAllExistingHelicopters();
+                Menu.ShowHelicopterMenu();
+                Console.Write("Choose an action: ");
+                chosen = Console.ReadLine();
+
+                switch (chosen)
+                {
+                    case "1":
+                        ShowAllExistingHelicopters();
+                        Console.Write("CREATE A NEW HELICOPTER\n\n");
+                        AMSConsole.ManageHelicopters.CreateNewHelicopter();
+                        Console.Write("Press any key to go back...");
+                        Console.ReadKey();
+                        break;
+
+                    case "2":
+                        ShowAllExistingHelicopters();
+                        Console.Write("SELECT A HELICOPTER\n\n");
+                        AMSConsole.ManageHelicopters.ManageSelectedHelicopter();
+                        break;
+
+                    case "3":
+                        ShowAllExistingHelicopters();
+                        Console.Write("DELETE A HELICOPTER\n\n");
+                        AMSConsole.ManageHelicopters.DeleteHelicopter();
+                        Console.Write("Press any key to go back...");
+                        Console.ReadKey();
+                        break;
+
+                    case "0":
+                        break;
+
+                    default:
+                        Console.Write("Wrong action!\nChoose an action: ");
+                        chosen = Console.ReadLine();
+                        break;
+                }
+            }
+        }
+
+        private static void ShowAllExistingHelicopters()
+        {
+            Console.Clear();
+            Console.Write("ALL EXISTING HELICOPTERS\n\n");
+            AMSConsole.ManageHelicopters.ShowAllHelicopters();
+            Console.WriteLine();
         }
     }
 }

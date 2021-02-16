@@ -1,6 +1,6 @@
 ﻿namespace AMSLibrary.Entities
 {
-    class Helicopter : IHasId
+    class Helicopter : IHasId, IParkable, IShowable
     {
         public string Id { get; set; }
         public string Model { get; set; }
@@ -31,5 +31,25 @@
         public void Park(string airportId) => AirportId = airportId;
 
         public void Unpark() => AirportId = string.Empty;
+
+        public string ShortInfo()
+        {
+            if (AirportId != string.Empty)
+                return $"{Id}     {AirportId}       {Model}\n";
+            else
+                return $"{Id}        -          {Model}\n";
+        }
+
+        public string FullInfo()
+        {
+            return $"ID:                 {Id}\n" +
+                   $"Model:              {Model}\n" +
+                   $"Cruise speed:       {CruiseSpeed}\n" +
+                   $"Empty weight:       {EmptyWeight}\n" +
+                   $"Max takeoff weight: {MaxTakeoffWeight}\n" +
+                   $"Range:              {Range}\n" +
+                   $"Fly method:         {FlyMethod}\n" +
+                   $"Parking in airport: {AirportId}";
+        }
     }
 }

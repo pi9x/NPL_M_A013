@@ -31,14 +31,14 @@ namespace AMSLibrary.DataAccess
         public void Delete(string id)
         {
             List<T> entities = Get(out _);
-            T entity = entities.First(e => e.GetId() == id);
-            //if (entity == null)
-            //    throw new Exception($"Deleting {typeof(T).Name} failed: {id} not found.");
-
-            entities.Remove(entity);
-
-            string json = JsonSerializer.Serialize(entities, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(filePath, json);
+            int deleteCount = entities.RemoveAll(e => e.GetId() == id);
+            if (deleteCount > 0)
+            {
+                string json = JsonSerializer.Serialize(entities, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(filePath, json);
+            }
+            else
+                throw new Exception($"{typeof(T).Name} {id} does not exists.");
         }
 
         public List<T> Get(out int currentId)
@@ -76,10 +76,10 @@ namespace AMSLibrary.DataAccess
 
         public void Update(T entity)
         {
-            T old = GetById(entity.GetId());
-
-            Delete(old.GetId());
-            Create(entity, true);
+            List<T> entities = Get(out _);
+            entities[entities.FindIndex(e => e.GetId() == entity.GetId())] = entity;
+            string json = JsonSerializer.Serialize(entities, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(filePath, json);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AMSConsole
+﻿using System.Collections.Generic;
+
+namespace AMSConsole
 {
     static class Validation
     {
@@ -9,6 +11,21 @@
                 return input;
 
             return string.Empty;
+        }
+
+        public static string PlaneType(string input)
+        {
+            List<string> planeTypes = new List<string>() { "CAG", "LGR", "PRV" };
+            input = input.Trim().ToUpper();
+            if (planeTypes.Contains(input))
+                return input;
+
+            return string.Empty;
+        }
+
+        public static string Id(string input)
+        {
+            return input.Trim().ToUpper();
         }
 
         public static double PositiveDouble(string input)

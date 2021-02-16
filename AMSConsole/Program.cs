@@ -1,7 +1,4 @@
-﻿using System;
-using AMSLibrary.Managements;
-
-namespace AMSConsole
+﻿namespace AMSConsole
 {
     class Program
     {

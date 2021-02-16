@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AMSLibrary.Entities
 {
-    class Airport : IHasId
+    class Airport : IHasId, IShowable
     {
         public string Id { get; set; }
         

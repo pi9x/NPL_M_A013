@@ -1,6 +1,6 @@
 ﻿namespace AMSLibrary.Entities
 {
-    class Fixedwing : IHasId, IParkable
+    class Fixedwing : IHasId, IParkable, IShowable
     {
         public string Id { get; set; }
         public string Model { get; set; }
@@ -39,7 +39,13 @@
 
         public void ChangeMinNeededRunwaySize(double minNeededRunwaySize) => MinNeededRunwaySize = minNeededRunwaySize;
 
-        public string ShortInfo() => $"{Id}     {AirportId}\n";
+        public string ShortInfo()
+        {
+            if (AirportId != string.Empty)
+                return $"{Id}     {PlaneType}         {AirportId}       {Model}\n";
+            else
+                return $"{Id}     {PlaneType}            -          {Model}\n";
+        }
 
         public string FullInfo()
         {

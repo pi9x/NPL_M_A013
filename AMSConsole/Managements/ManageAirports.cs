@@ -1,15 +1,11 @@
 ﻿using AMSLibrary.Managements;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMSConsole
 {
     static class ManageAirports
     {
-        static Managements managements = Managements.InitManagements(FilePath.airportsFile, FilePath.fixedwingsFile, FilePath.helicoptersFile);
+        static readonly Managements managements = Managements.InitManagements(FilePath.airportsFile, FilePath.fixedwingsFile, FilePath.helicoptersFile);
 
         public static void ShowAllAirports()
         {
@@ -25,10 +21,10 @@ namespace AMSConsole
 
         public static void CreateNewAirport()
         {
-            string name = string.Empty;
-            double runwaySize = 0;
-            int fixedwingCapacity = 0;
-            int helicopterCapacity = 0;
+            string  name                = string.Empty;
+            double  runwaySize          = 0;
+            int     fixedwingCapacity   = 0;
+            int     helicopterCapacity  = 0;
 
             while (string.IsNullOrWhiteSpace(name))
             {
@@ -68,7 +64,7 @@ namespace AMSConsole
         public static void DeleteAirport()
         {
             Console.Write("Airport ID: ");
-            string airportId = Console.ReadLine().Trim().ToUpper();
+            string airportId = Validation.Id(Console.ReadLine());
 
             try
             {
@@ -84,7 +80,7 @@ namespace AMSConsole
         public static void ManageSelectedAirport()
         {
             Console.Write("Airport ID: ");
-            string airportId = Console.ReadLine().Trim().ToUpper();
+            string airportId = Validation.Id(Console.ReadLine());
 
             try
             {
@@ -132,7 +128,8 @@ namespace AMSConsole
         private static void ParkFixedwing(string airportId)
         {
             Console.Write("\nPARK A FIXEDWING\nFixedwing ID: ");
-            string fixedwingId = Console.ReadLine().Trim().ToUpper();
+            string fixedwingId = Validation.Id(Console.ReadLine());
+
             try
             {
                 managements.ParkFixedwing(airportId, fixedwingId);
@@ -147,7 +144,8 @@ namespace AMSConsole
         private static void UnparkFixedwing(string airportId)
         {
             Console.Write("\nUNPARK A FIXEDWING\nFixedwing ID: ");
-            string fixedwingId = Console.ReadLine().Trim().ToUpper();
+            string fixedwingId = Validation.Id(Console.ReadLine());
+
             try
             {
                 managements.UnparkFixedwing(airportId, fixedwingId);
@@ -162,7 +160,8 @@ namespace AMSConsole
         private static void ParkHelicopter(string airportId)
         {
             Console.Write("\nPARK A HELICOPTER\nHelicopter ID: ");
-            string helicopterId = Console.ReadLine().Trim().ToUpper();
+            string helicopterId = Validation.Id(Console.ReadLine());
+
             try
             {
                 managements.ParkHelicopter(airportId, helicopterId);
@@ -177,7 +176,8 @@ namespace AMSConsole
         private static void UnparkHelicopter(string airportId)
         {
             Console.Write("\nUNPARK A HELICOPTER\nHelicopter ID: ");
-            string helicopterId = Console.ReadLine().Trim().ToUpper();
+            string helicopterId = Validation.Id(Console.ReadLine());
+
             try
             {
                 managements.UnparkHelicopter(airportId, helicopterId);

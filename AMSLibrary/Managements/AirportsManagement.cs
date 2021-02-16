@@ -2,6 +2,7 @@
 using AMSLibrary.Entities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace AMSLibrary.Managements
@@ -16,6 +17,13 @@ namespace AMSLibrary.Managements
         #region Create managements singleton
         private Managements(string airportsPath, string fixedwingsPath, string helicoptersPath)
         {
+            if (!File.Exists(airportsPath))
+                File.Create(airportsPath);
+            if (!File.Exists(fixedwingsPath))
+                File.Create(fixedwingsPath);
+            if (!File.Exists(helicoptersPath))
+                File.Create(helicoptersPath);
+
             airportsAccess = new AirportsAccess(airportsPath);
             fixedwingsAccess = new FixedwingsAccess(fixedwingsPath);
             helicoptersAccess = new HelicoptersAccess(helicoptersPath);
@@ -85,7 +93,10 @@ namespace AMSLibrary.Managements
         {
             Helicopter helicopter = helicoptersAccess.GetById(helicopterId);
             if (helicopter.AirportId == string.Empty)
+            {
                 airportsAccess.ParkHelicopter(airportId, helicopterId);
+                helicoptersAccess.Park(helicopterId, airportId);
+            }   
             else
                 throw new Exception($"Helicopter {helicopterId} already parks in airport {helicopter.AirportId}.");
         }

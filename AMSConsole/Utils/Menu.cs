@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMSConsole
 {
@@ -21,8 +17,8 @@ namespace AMSConsole
         {
             Console.Write("MANAGE AIRPORTS\n\n" +
                           "[1] - Create a new airport\n" +
-                          "[2] - Delete an airport\n" +
-                          "[3] - Select an airport\n" +
+                          "[2] - Select an airport\n" +
+                          "[3] - Delete an airport\n" +
                           "[0] - Back to home\n\n");
         }
 
@@ -41,15 +37,17 @@ namespace AMSConsole
             Console.Write("MANAGE FIXEDWINGS\n\n" +
                           "[1] - Create a new fixedwing\n" +
                           "[2] - Select a fixedwing\n" +
+                          "[3] - Delete a fixedwing\n" +
                           "[0] - Back to home\n\n");
         }
 
-        public static void ShowDetailedFixedwingMenu()
+        public static void ShowSelectedFixedwingMenu()
         {
             Console.Write("MANAGE THIS FIXEDWING\n\n" +
                           "[1] - Change plane type\n" +
                           "[2] - Change min needed runway size\n" +
                           "[3] - Park to an airport\n" +
+                          "[4] - Unpark\n" +
                           "[0] - Back to fixedwings management\n\n");
         }
 
@@ -58,13 +56,15 @@ namespace AMSConsole
             Console.Write("MANAGE HELICOPTERS\n\n" +
                           "[1] - Create a new helicopter\n" +
                           "[2] - Select a helicopter\n" +
+                          "[3] - Delete a helicopter\n" +
                           "[0] - Back to main menu\n\n");
         }
 
-        public static void ShowDetailedHelicopterMenu()
+        public static void ShowSelectedHelicopterMenu()
         {
             Console.Write("MANAGE THIS HELICOPTER\n\n" +
                           "[1] - Park to an airport\n" +
+                          "[2] - Unpark\n" +
                           "[0] - Back to helicopters management\n\n");
         }
     }
